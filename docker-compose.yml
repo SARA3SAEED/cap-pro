@@ -1,0 +1,42 @@
+
+version: '3.8'
+
+services:
+  flask-app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      REDIS_HOST: redis
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: 123456
+      DB_NAME: mydatabase
+    depends_on:
+      - redis
+      - db
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123456
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

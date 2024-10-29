@@ -1,3 +1,4 @@
+# app.py
 from flask import Flask, request, jsonify, render_template
 import redis
 import mysql.connector
@@ -14,7 +15,7 @@ def get_db():
     conn = mysql.connector.connect(
         host=os.environ.get('DB_HOST', 'db'),
         user=os.environ.get('DB_USER', 'user'),
-        password=os.environ.get('DB_PASSWORD', 'password'),
+        password=os.environ.get('DB_PASSWORD', 123456),
         database=os.environ.get('DB_NAME', 'mydatabase')
     )
     return conn
