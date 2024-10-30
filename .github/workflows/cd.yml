@@ -1,0 +1,14 @@
+name : test2
+
+on: [pull]
+
+
+jobs:
+  bulid-test2:
+      runs-on: ubuntu-latest
+      steps: 
+        - name: Get the branch name
+          env:
+            JOB_NAME1: ${{ github.job }}
+          run: echo "branch name is $JOB_NAME1 "
+          
